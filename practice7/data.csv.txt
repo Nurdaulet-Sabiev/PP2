@@ -1,0 +1,11 @@
+first_name,last_name,phone,email
+Alex,Smith,87011234567,alex.smith@gmail.com
+John,Brown,87019876543,john.brown@gmail.com
+Alice,Johnson,87771234567,alice.johnson@gmail.com
+Michael,Lee,87015556677,michael.lee@gmail.com
+Emma,Davis,87770001122,emma.davis@gmail.com
+Daniel,Wilson,87017778899,daniel.wilson@gmail.com
+Sophia,Moore,87773334455,sophia.moore@gmail.com
+James,Taylor,87016667788,james.taylor@gmail.com
+Olivia,Anderson,87775556677,olivia.anderson@gmail.com
+David,Thomas,87019990011,david.thomas@gmail.com

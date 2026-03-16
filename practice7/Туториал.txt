@@ -1,0 +1,240 @@
+Отлично 👍 Значит у тебя на Windows работает команда **`py`**, а не `python`.
+Я перепишу **весь туториал правильно для тебя**.
+
+---
+
+# 📘 PhoneBook Tutorial (для файла `task.py`)
+
+Все команды нужно писать через **`py`**.
+
+Пример:
+
+```bash
+py task.py команда
+```
+
+---
+
+# 1️⃣ Установить библиотеку
+
+Один раз в терминале:
+
+```bash
+py -m pip install psycopg2-binary
+```
+
+Это библиотека для подключения Python к PostgreSQL.
+
+---
+
+# 2️⃣ Перейти в папку с программой
+
+Например:
+
+```bash
+cd Desktop/PYTHON/practice 7
+```
+
+Проверь файл:
+
+```bash
+dir
+```
+
+Ты должен увидеть:
+
+```
+task.py
+```
+
+---
+
+# 3️⃣ Создать таблицу PhoneBook
+
+Запусти:
+
+```bash
+py task.py init
+```
+
+Программа создаст таблицу в PostgreSQL:
+
+```
+phonebook
+```
+
+Таблица будет такой:
+
+| id | first_name | last_name | phone | email |
+| -- | ---------- | --------- | ----- | ----- |
+
+---
+
+# 4️⃣ Добавить контакт вручную
+
+Команда:
+
+```bash
+py task.py add
+```
+
+Консоль спросит:
+
+```
+First name: Alex
+Last name: Smith
+Phone: 87011234567
+Email: alex@gmail.com
+```
+
+Контакт сохранится в базе.
+
+---
+
+# 5️⃣ Загрузить контакты из CSV
+
+Создай файл **data.csv**
+
+Пример:
+
+```csv
+first_name,last_name,phone,email
+Alex,Smith,87011234567,alex@gmail.com
+John,Brown,87019876543,john@gmail.com
+Alice,Johnson,87771234567,alice@gmail.com
+```
+
+Теперь загрузка:
+
+```bash
+py task.py import-csv data.csv
+```
+
+Все строки добавятся в таблицу.
+
+---
+
+# 6️⃣ Посмотреть все контакты
+
+```bash
+py task.py query --all
+```
+
+Пример вывода:
+
+```
+(1, 'Alex', 'Smith', '87011234567', 'alex@gmail.com', datetime...)
+(2, 'John', 'Brown', '87019876543', 'john@gmail.com', datetime...)
+```
+
+---
+
+# 7️⃣ Найти контакт
+
+### По имени
+
+```bash
+py task.py query --first Alex
+```
+
+### По номеру
+
+```bash
+py task.py query --phone 87011234567
+```
+
+### Частичный поиск
+
+```bash
+py task.py query --like Al
+```
+
+Найдёт:
+
+```
+Alex
+Alice
+Albert
+```
+
+---
+
+# 8️⃣ Изменить имя
+
+```bash
+py task.py update-name --phone 87011234567 --new-first Alexander
+```
+
+---
+
+# 9️⃣ Изменить номер
+
+```bash
+py task.py update-phone --by-name "Alex Smith" --new-phone 87770000000
+```
+
+---
+
+# 🔟 Удалить контакт
+
+### По номеру
+
+```bash
+py task.py delete-by-phone 87770000000
+```
+
+### По имени
+
+```bash
+py task.py delete-by-name --first Alex --last Smith
+```
+
+---
+
+# ⚡ Полный пример работы
+
+```bash
+py task.py init
+py task.py add
+py task.py query --all
+py task.py update-name --phone 87011234567 --new-first Alexander
+py task.py delete-by-phone 87011234567
+```
+
+---
+
+# 🧠 Что делает программа
+
+Это **PhoneBook на Python + PostgreSQL**.
+
+Она умеет:
+
+| Команда           | Что делает        |
+| ----------------- | ----------------- |
+| `init`            | создаёт таблицу   |
+| `add`             | добавляет контакт |
+| `import-csv`      | загружает CSV     |
+| `query`           | ищет контакты     |
+| `update-name`     | меняет имя        |
+| `update-phone`    | меняет номер      |
+| `delete-by-phone` | удаляет по номеру |
+| `delete-by-name`  | удаляет по имени  |
+
+---
+
+# 🎓 Если преподаватель спросит
+
+Можно сказать:
+
+> Я написал CLI приложение PhoneBook на Python с использованием PostgreSQL.
+> Оно поддерживает создание таблицы, добавление контактов через консоль или CSV файл, поиск с фильтрами, обновление и удаление записей.
+
+---
+
+✅ Если хочешь, я ещё могу показать:
+
+* **как преподаватель может усложнить это задание**
+* **какие 5 вопросов почти всегда задают на защите**
+* **и как ответить на них за 20 секунд**
+
+Это реально может **спасти тебя на защите этой лабораторной.**
