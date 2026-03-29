@@ -1,0 +1,237 @@
+Дам тебе **полный туториал: как запустить, как пользоваться, и чем отличается от твоего прошлого PhoneBook кода**.
+
+---
+
+# 1. Что у тебя теперь за программа
+
+Твой проект теперь состоит из:
+
+* PostgreSQL база
+* Таблица phonebook
+* SQL **FUNCTION**
+* SQL **PROCEDURE**
+* Python CLI программа
+* Работа через команды
+
+Это уже не просто CRUD, а **PhoneBook с хранимыми процедурами** — это важно для преподавателя.
+
+---
+
+# 2. Установка (если с нуля)
+
+## Шаг 1 — установить PostgreSQL
+
+Скачать:
+
+* PostgreSQL
+
+Во время установки:
+
+```
+user: postgres
+password: 0
+port: 5432
+```
+
+---
+
+## Шаг 2 — установить psycopg2
+
+В терминале:
+
+```bash
+pip install psycopg2
+```
+
+Проверка:
+
+```bash
+python -c "import psycopg2; print('OK')"
+```
+
+---
+
+# 3. Запуск программы
+
+У тебя файл:
+
+```
+phonebook.py
+```
+
+Открываешь терминал в папке и запускаешь.
+
+---
+
+# 4. Инициализация базы (ОБЯЗАТЕЛЬНО ПЕРВЫЙ ШАГ)
+
+```bash
+python phonebook.py init
+```
+
+Это создаст:
+
+* таблицу
+* function search
+* procedure upsert
+* procedure bulk insert
+* function pagination
+* procedure delete
+
+Делается **один раз**.
+
+---
+
+# 5. Добавить пользователя
+
+```bash
+python phonebook.py upsert --first Ali --last Khan --phone 87001234567 --email ali@mail.com
+```
+
+Что происходит:
+
+* вызывается **stored procedure**
+* если пользователь есть → обновляет телефон
+* если нет → вставляет
+
+---
+
+# 6. Поиск по шаблону
+
+```bash
+python phonebook.py search --pattern Ali
+```
+
+Или:
+
+```bash
+python phonebook.py search --pattern 8700
+```
+
+Это вызывает **SQL FUNCTION search_phonebook(pattern)**.
+
+Можно искать:
+
+* часть имени
+* часть фамилии
+* часть телефона
+
+---
+
+# 7. Пагинация (LIMIT OFFSET)
+
+```bash
+python phonebook.py page --limit 5 --offset 0
+```
+
+Примеры:
+
+```
+page 1 → limit 5 offset 0
+page 2 → limit 5 offset 5
+page 3 → limit 5 offset 10
+```
+
+---
+
+# 8. Массовое добавление
+
+```bash
+python phonebook.py bulk
+```
+
+Потом программа спросит:
+
+```
+How many users: 2
+User 1
+First name:
+Last name:
+Phone:
+Email:
+```
+
+Тут используется:
+
+* LOOP
+* IF
+* проверка телефона
+* procedure insert_many_users
+
+Это **обязательный пункт задания**.
+
+---
+
+# 9. Удаление
+
+По телефону:
+
+```bash
+python phonebook.py delete --phone 87001234567
+```
+
+По имени:
+
+```bash
+python phonebook.py delete --first Ali
+```
+
+---
+
+# 10. Все команды программы
+
+| Команда | Что делает                  |
+| ------- | --------------------------- |
+| init    | создать таблицы и процедуры |
+| upsert  | добавить или обновить       |
+| search  | поиск по шаблону            |
+| bulk    | добавить много              |
+| page    | пагинация                   |
+| delete  | удалить                     |
+
+---
+
+# 11. Разница с твоим прошлым кодом (очень важно для защиты)
+
+## Старый код
+
+Ты делал всё в Python:
+
+```
+Python → SQL SELECT
+Python → SQL INSERT
+Python → SQL UPDATE
+Python → SQL DELETE
+```
+
+То есть логика была в Python.
+
+---
+
+## Новый код
+
+Теперь логика в PostgreSQL:
+
+```
+Python → CALL PROCEDURE
+Python → SELECT FUNCTION
+PostgreSQL делает логику
+```
+
+### Главное отличие:
+
+| Старый                    | Новый                  |
+| ------------------------- | ---------------------- |
+| SQL запросы из Python     | Stored Procedures      |
+| Логика в Python           | Логика в PostgreSQL    |
+| Только CRUD               | Functions + Procedures |
+| Нет pagination            | Есть pagination        |
+| Нет bulk insert procedure | Есть loop + if         |
+| Нет pattern function      | Есть pattern search    |
+
+---
+
+
+
+
+В предыдущей версии все операции CRUD были реализованы на Python с использованием SQL-запросов. В новой версии бизнес-логика перенесена в PostgreSQL с использованием хранимых процедур и функций. Теперь Python только вызывает процедуры и функции. Система также поддерживает пагинацию, поиск по шаблону, массовую вставку с циклом и проверкой, а также процедуру удаления.
