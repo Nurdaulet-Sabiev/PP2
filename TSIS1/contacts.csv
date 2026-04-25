@@ -1,0 +1,5 @@
+name,email,birthday,group,phone,phone_type
+John Doe,john@gmail.com,1998-05-10,Friend,+77010000001,mobile
+John Doe,john@gmail.com,1998-05-10,Friend,+77010000002,work
+Alice Smith,alice@company.com,2000-11-21,Work,+77010000003,home
+Mom,mom@example.com,1975-03-08,Family,+77010000004,mobile
